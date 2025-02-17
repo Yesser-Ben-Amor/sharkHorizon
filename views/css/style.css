@@ -1,4 +1,4 @@
-body{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,36 +17,28 @@ body{
     overflow: hidden;
 }
 
-#gameCanvas{
-    background-color: black;
+h1 {
+    font-size: 4em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
 }
 
-#shark {
-    width: 300px;
-    height: 150px;
-    background-image: url('../img/1.Sharkie/1.IDLE/1.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    animation: swim 3s infinite;
+#playButton {
+    font-size: 1.5em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    background-color: #560640;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes swim {
-    0% {
-        transform: translateX(-100%) translateY(0);
-    }
-    25% {
-        transform: translateX(0) translateY(50px);
-    }
-    50% {
-        transform: translateX(100%) translateY(0);
-    }
-    75% {
-        transform: translateX(0) translateY(-50px);
-    }
-    100% {
-        transform: translateX(-100%) translateY(0);
-    }
+#playButton:hover {
+    transform: scale(1.1);
+    background-color: #7a0959;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes moveBackground {
