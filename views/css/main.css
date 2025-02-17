@@ -41,61 +41,64 @@ body {
     z-index: 1;
 }
 
-/* Mehr Luftblasen */
-.bubble {
+/* Luftblasen */
+body::before,
+body::after {
+    content: '';
     position: fixed;
-    background: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
-    pointer-events: none;
+    background: rgba(255, 255, 255, 0.5);
+    animation: bubbles 8s linear infinite;
     z-index: 0;
 }
 
-/* Große Blasen */
-.bubble:nth-child(3n) {
+body::before {
     width: 20px;
     height: 20px;
-    left: 25%;
-    animation: bubbles 12s linear infinite;
-    animation-delay: 0s;
+    left: 20%;
+    animation-duration: 6s;
 }
 
-/* Mittlere Blasen */
-.bubble:nth-child(3n+1) {
+body::after {
     width: 15px;
     height: 15px;
-    left: 45%;
-    animation: bubbles 10s linear infinite;
+    left: 80%;
+    animation-delay: 3s;
+    animation-duration: 8s;
+}
+
+/* Zusätzliche Blasen */
+#gameCanvas::before,
+#gameCanvas::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    animation: bubbles 7s linear infinite;
+}
+
+#gameCanvas::before {
+    width: 25px;
+    height: 25px;
+    left: 40%;
     animation-delay: 2s;
 }
 
-/* Kleine Blasen */
-.bubble:nth-child(3n+2) {
+#gameCanvas::after {
     width: 10px;
     height: 10px;
-    left: 65%;
-    animation: bubbles 8s linear infinite;
+    left: 60%;
     animation-delay: 4s;
-}
-
-/* Zusätzliche Blasen auf der rechten Seite */
-.bubble:nth-child(4n) {
-    left: 85%;
-    animation-delay: 3s;
-}
-
-/* Zusätzliche Blasen auf der linken Seite */
-.bubble:nth-child(4n+1) {
-    left: 15%;
-    animation-delay: 5s;
+    animation-duration: 5s;
 }
 
 @keyframes bubbles {
     0% {
-        transform: translateY(100vh) scale(0);
+        transform: translateY(100vh) scale(0.5);
         opacity: 0;
     }
     20% {
-        opacity: 0.5;
+        opacity: 0.8;
         transform: translateY(80vh) scale(1);
     }
     100% {
