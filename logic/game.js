@@ -21,7 +21,7 @@ function gameLoop() {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Draw character in the center of canvas
+    // Draw character in the canvas
     let x = 20;
     let y = 20;
     let z = 50;
