@@ -22,9 +22,11 @@ function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     // Draw character in the center of canvas
-    let x = (canvas.width - character.width) / 2;
-    let y = (canvas.height - character.height) / 2;
-    ctx.drawImage(character, x, y);
+    let x = 20;
+    let y = 20;
+    let z = 50;
+    let w = 150;
+    ctx.drawImage(character, x, y, z, w);
     
     // Request next frame
     requestAnimationFrame(gameLoop);
