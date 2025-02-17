@@ -5,10 +5,73 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #000;
+    background: linear-gradient(
+        180deg,
+        #1a4569 0%,
+        #2a6594 25%,
+        #3785be 50%,
+        #2a6594 75%,
+        #1a4569 100%
+    );
+    animation: oceanMove 8s ease-in-out infinite;
+    overflow: hidden;
+}
+
+@keyframes oceanMove {
+    0%, 100% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 0% 100%;
+    }
 }
 
 #gameCanvas {
-    border: 2px solid #560640;
-    box-shadow: 0 0 20px rgba(86, 6, 64, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.2),
+        inset 0 0 50px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(
+        135deg,
+        rgba(26, 69, 105, 0.9),
+        rgba(42, 101, 148, 0.8)
+    );
+}
+
+/* Bubbles animation */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: bubbles 15s linear infinite;
+    z-index: -1;
+}
+
+body::before {
+    left: 10%;
+    animation-delay: 2s;
+}
+
+body::after {
+    right: 15%;
+    animation-delay: 5s;
+}
+
+@keyframes bubbles {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100vh) scale(2);
+        opacity: 0;
+    }
 }
