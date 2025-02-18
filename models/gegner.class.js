@@ -1,4 +1,4 @@
-import Entity from './Entity.js';
+import Entity from './entity.class.js';
 
 class Gegner extends Entity {
     constructor(x, y, stärke, leben, geschwindigkeit) {

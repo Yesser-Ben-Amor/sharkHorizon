@@ -1,4 +1,4 @@
-import Gegner from './Gegner.js';
+import Gegner from './gegner.class.js';
 
 class Krake extends Gegner {
     constructor(x, y, stärke, leben, geschwindigkeit, tentakelAnzahl) {

@@ -1,4 +1,4 @@
-import Entity from './Entity.js';
+import Entity from './entity.class.js';
 
 class Hai extends Entity {
     constructor(x, y, größe, geschwindigkeit) {
