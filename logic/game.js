@@ -9,6 +9,14 @@ let player;
 async function init() {
     canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
+    
+    await initializeGame();
+    
+    console.log('Game initialized');
+}
+
+async function initializeGame() {
+    // Lade das Charakter-Bild
     character.src = 'views/img/1.Sharkie/1.IDLE/1.png';
     
     // Initialisiere den Spieler
@@ -21,12 +29,13 @@ async function init() {
     }
     
     // Starte den Game Loop sobald das Bild geladen ist
-    character.onload = function() {
-        console.log('Character image loaded');
-        gameLoop();
-    }
-    
-    console.log('Game initialized');
+    return new Promise((resolve) => {
+        character.onload = () => {
+            console.log('Character image loaded');
+            gameLoop();
+            resolve();
+        };
+    });
 }
 
 // Game loop
