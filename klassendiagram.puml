@@ -1,76 +1,66 @@
 @startuml
+class Player {
+    - nickname: String
+    - score: Number
+    - highScore: Number
+    - verfügbareLeben: Number
+    + ladePlayerDaten()
+    + speicherePlayerDaten()
+    + aktualisiereHighScore()
+    + verliereLeben()
+    + erhöheScore(punkte: Number)
+}
+
+class DatabaseManager {
+    + speichereDaten(collection: String, id: String, data: Object)
+    + ladeDaten(collection: String, id: String): Object
+    + ladeHighscoreListe(): Array
+}
+
 class Entity {
-    - position
+    - position: Object
     + bewegen()
 }
 
 class Hai {
-    - größe
-    - geschwindigkeit
-    - leben
-    - lebenAnzahl
-    - coins
-    + fressen(fisch)
-    + angreifen(gegner)
-    + sammleCoin(coin)
+    - größe: Number
+    - geschwindigkeit: Number
+    - leben: Number
+    - lebenAnzahl: Number
+    - coins: Number
+    + fressen(fisch: Fisch)
+    + angreifen(gegner: Gegner)
+    + sammleCoin(coin: Coin)
     + verliereLeben()
-    + istGameOver(): boolean
+    + istGameOver(): Boolean
 }
 
 class Fisch {
-    - größe
-    - geschwindigkeit
-    - punkte
+    - größe: Number
+    - geschwindigkeit: Number
+    - punkte: Number
     + schwimmen()
 }
 
 class Gegner {
-    - stärke
-    - leben
-    - geschwindigkeit
-    + angreifen(hai)
-}
-
-class HaiGegner {
-    + jagen(hai)
-    + fliehen()
-}
-
-class Qualle {
-    - giftig
-    + elektrisieren(hai)
-}
-
-class TiefseeKreatur {
-    - sichtbarkeit
-    + verstecken()
-    + überraschungsangriff(hai)
-}
-
-class Krake {
-    - tentakelAnzahl
-    + festhalten(hai)
-    + tinteWerfen()
-}
-
-class PiranhaSchwarm {
-    - anzahl
-    + schwärmen()
-    + biss(hai)
+    - stärke: Number
+    - leben: Number
+    - geschwindigkeit: Number
+    + angreifen(hai: Hai)
 }
 
 class Coin {
-    - wert
-    + einsammeln(hai)
+    - wert: Number
+    + einsammeln(hai: Hai)
 }
 
 class Ozean {
-    - größe
-    - hintergrund
-    - hindernisse
-    - fische
-    - gegner
-    - coins
+    - größe: Number
+    - hintergrund: String
+    - hindernisse: Array
+    - fische: Array
+    - gegner: Array
+    - coins: Array
     + spawneFisch()
     + spawneGegner()
     + spawneCoin()
@@ -81,16 +71,14 @@ Entity <|-- Fisch
 Entity <|-- Gegner
 Entity <|-- Coin
 
-Gegner <|-- HaiGegner
-Gegner <|-- Qualle
-Gegner <|-- TiefseeKreatur
-Gegner <|-- Krake
-Gegner <|-- PiranhaSchwarm
-
 Hai --> Fisch : frisst >
 Hai --> Gegner : kämpft gegen >
 Hai --> Coin : sammelt >
 Ozean --> Fisch : spawnt >
 Ozean --> Gegner : spawnt >
 Ozean --> Coin : spawnt >
+
+Player --> Hai : steuert >
+Player --> DatabaseManager : nutzt >
+DatabaseManager --> Player : speichert/lädt Daten >
 @enduml
