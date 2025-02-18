@@ -10,7 +10,7 @@ function init() {
     canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
     
-    initializeGame().catch(error => {
+    initializeGame().catch(function(error) {
         console.error('Fehler bei der Spielinitialisierung:', error);
     });
     
@@ -31,8 +31,8 @@ async function initializeGame() {
     }
     
     // Starte den Game Loop sobald das Bild geladen ist
-    return new Promise((resolve) => {
-        character.onload = () => {
+    return new Promise(function(resolve) {
+        character.onload = function() {
             console.log('Character image loaded');
             gameLoop();
             resolve();
