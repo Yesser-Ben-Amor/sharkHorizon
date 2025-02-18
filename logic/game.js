@@ -6,16 +6,19 @@ let ctx;
 let character = new Image();
 let player;
 
-function init() {
+async function init() {
     canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
     character.src = 'views/img/1.Sharkie/1.IDLE/1.png';
     
     // Initialisiere den Spieler
     player = new Player('Player1');
-    player.ladePlayerDaten().then(() => {
+    try {
+        await player.ladePlayerDaten();
         console.log('Spielerdaten geladen');
-    });
+    } catch (error) {
+        console.error('Fehler beim Laden der Spielerdaten:', error);
+    }
     
     // Starte den Game Loop sobald das Bild geladen ist
     character.onload = function() {
