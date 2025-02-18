@@ -5,11 +5,7 @@
             "score": "number",
             "highScore": "number",
             "lives": "number",
-            "lastPlayed": "timestamp"
-        }
-    },
-    "gameState": {
-        "$playerId": {
+            "lastPlayed": "timestamp",
             "position": {
                 "x": "number",
                 "y": "number"
@@ -18,8 +14,14 @@
             "collectedCoins": "number",
             "health": "number",
             "powerUps": {
-                "shield": "boolean",
-                "speedBoost": "boolean"
+                "shield": {
+                    "active": "boolean",
+                    "duration": "number"
+                },
+                "speedBoost": {
+                    "active": "boolean",
+                    "cooldown": "number"
+                }
             }
         }
     },
@@ -28,6 +30,35 @@
             "playerId": "string",
             "nickname": "string",
             "score": "number",
+            "timestamp": "timestamp"
+        }
+    },
+    "gameState": {
+        "$gameId": {
+            "players": {
+                "$playerId": {
+                    "score": "number",
+                    "currentLevel": "number",
+                    "position": {
+                        "x": "number",
+                        "y": "number"
+                    },
+                    "collectedCoins": "number",
+                    "health": "number",
+                    "powerUps": {
+                        "shield": {
+                            "active": "boolean",
+                            "duration": "number"
+                        },
+                        "speedBoost": {
+                            "active": "boolean",
+                            "cooldown": "number"
+                        }
+                    }
+                }
+            },
+            "status": "string",
+            "currentLevel": "number",
             "timestamp": "timestamp"
         }
     }
