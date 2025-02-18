@@ -6,13 +6,15 @@ let ctx;
 let character = new Image();
 let player;
 
-async function init() {
+function init() {
     canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
     
-    await initializeGame();
+    initializeGame().catch(error => {
+        console.error('Fehler bei der Spielinitialisierung:', error);
+    });
     
-    console.log('Game initialized');
+    console.log('Game initialization started');
 }
 
 async function initializeGame() {
