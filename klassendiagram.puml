@@ -1,0 +1,96 @@
+@startuml
+class Entity {
+    - position
+    + bewegen()
+}
+
+class Hai {
+    - größe
+    - geschwindigkeit
+    - leben
+    - lebenAnzahl
+    - coins
+    + fressen(fisch)
+    + angreifen(gegner)
+    + sammleCoin(coin)
+    + verliereLeben()
+    + istGameOver(): boolean
+}
+
+class Fisch {
+    - größe
+    - geschwindigkeit
+    - punkte
+    + schwimmen()
+}
+
+class Gegner {
+    - stärke
+    - leben
+    - geschwindigkeit
+    + angreifen(hai)
+}
+
+class HaiGegner {
+    + jagen(hai)
+    + fliehen()
+}
+
+class Qualle {
+    - giftig
+    + elektrisieren(hai)
+}
+
+class TiefseeKreatur {
+    - sichtbarkeit
+    + verstecken()
+    + überraschungsangriff(hai)
+}
+
+class Krake {
+    - tentakelAnzahl
+    + festhalten(hai)
+    + tinteWerfen()
+}
+
+class PiranhaSchwarm {
+    - anzahl
+    + schwärmen()
+    + biss(hai)
+}
+
+class Coin {
+    - wert
+    + einsammeln(hai)
+}
+
+class Ozean {
+    - größe
+    - hintergrund
+    - hindernisse
+    - fische
+    - gegner
+    - coins
+    + spawneFisch()
+    + spawneGegner()
+    + spawneCoin()
+}
+
+Entity <|-- Hai
+Entity <|-- Fisch
+Entity <|-- Gegner
+Entity <|-- Coin
+
+Gegner <|-- HaiGegner
+Gegner <|-- Qualle
+Gegner <|-- TiefseeKreatur
+Gegner <|-- Krake
+Gegner <|-- PiranhaSchwarm
+
+Hai --> Fisch : frisst >
+Hai --> Gegner : kämpft gegen >
+Hai --> Coin : sammelt >
+Ozean --> Fisch : spawnt >
+Ozean --> Gegner : spawnt >
+Ozean --> Coin : spawnt >
+@enduml

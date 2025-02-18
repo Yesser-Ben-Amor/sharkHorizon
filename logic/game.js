@@ -24,8 +24,8 @@ function gameLoop() {
     // Draw character in the canvas
     let x = 20;
     let y = 20;
-    let z = 50;
-    let w = 150;
+    let z = 150;
+    let w = 350;
     ctx.drawImage(character, x, y, z, w);
     
     // Request next frame
