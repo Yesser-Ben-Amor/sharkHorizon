@@ -18,6 +18,16 @@ entity "players" {
   ** powerUps.shield.duration : number
   ** powerUps.speedBoost.active : boolean
   ** powerUps.speedBoost.cooldown : number
+  * statistics : object
+  ** statistics.totalPlayTime : number
+  ** statistics.gamesPlayed : number
+  ** statistics.enemiesDefeated : number
+  * settings : object
+  ** settings.controls : string
+  ** settings.soundVolume : number
+  * achievements : object
+  ** achievements.unlockedAt : timestamp
+  ** achievements.progress : number
 }
 
 entity "highscores" {
@@ -26,13 +36,26 @@ entity "highscores" {
   * nickname : string
   * score : number
   * timestamp : timestamp
+  * levelReached : number
+  * totalPlayTime : number
 }
 
 entity "gameState" {
   * $gameId : string
   * status : string
   * currentLevel : number
-  * timestamp : timestamp
+  * startTime : timestamp
+  * lastUpdated : timestamp
+  * settings : object
+  ** settings.difficulty : string
+  ** settings.gameMode : string
+  * enemies : object
+  ** enemies.$enemyId.type : string
+  ** enemies.$enemyId.position : object
+  ** enemies.$enemyId.health : number
+  * collectibles : object
+  ** collectibles.$itemId.type : string
+  ** collectibles.$itemId.position : object
   * players : object
 }
 
@@ -52,8 +75,10 @@ entity "gameState.players" {
   ** powerUps.speedBoost.cooldown : number
 }
 
-players ||--o| highscores : has
-gameState ||--o| gameState.players : contains
+players ||--o{ highscores : "has many"
+gameState ||--o{ gameState.players : contains
+gameState ||--|{ "gameState.enemies" : spawns
+gameState ||--|{ "gameState.collectibles" : generates
 
 note right of players
     Stored under /players/$playerId
