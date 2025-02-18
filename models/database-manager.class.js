@@ -1,6 +1,6 @@
 // Import Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-import { getFirestore, doc, getDoc, setDoc, collection, query, orderBy, limit, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+import { getDatabase, ref, set, get, query, orderByChild, limitToLast } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
 
 class DatabaseManager {
     constructor() {
@@ -8,6 +8,7 @@ class DatabaseManager {
         const firebaseConfig = {
             apiKey: "AIzaSyDRwFWkrWkN7_TLXzFh1_Zy-lxRJw7_3Oo",
             authDomain: "sharkhorizon.firebaseapp.com",
+            databaseURL: "https://sharkhorizon-default-rtdb.europe-west1.firebasedatabase.app",
             projectId: "sharkhorizon",
             storageBucket: "sharkhorizon.appspot.com",
             messagingSenderId: "1027916663451",
@@ -16,13 +17,13 @@ class DatabaseManager {
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        this.db = getFirestore(app);
+        this.db = getDatabase(app);
     }
 
     async speichereDaten(collection, id, data) {
         try {
-            const docRef = doc(this.db, collection, id);
-            await setDoc(docRef, data);
+            const reference = ref(this.db, `${collection}/${id}`);
+            await set(reference, data);
             return true;
         } catch (error) {
             console.error(`Fehler beim Speichern in ${collection}:`, error);
@@ -32,11 +33,11 @@ class DatabaseManager {
 
     async ladeDaten(collection, id) {
         try {
-            const docRef = doc(this.db, collection, id);
-            const docSnap = await getDoc(docRef);
+            const reference = ref(this.db, `${collection}/${id}`);
+            const snapshot = await get(reference);
             
-            if (docSnap.exists()) {
-                return docSnap.data();
+            if (snapshot.exists()) {
+                return snapshot.val();
             }
             return null;
         } catch (error) {
@@ -47,14 +48,24 @@ class DatabaseManager {
 
     async ladeHighscoreListe() {
         try {
-            const highscoresRef = collection(this.db, 'players');
-            const q = query(highscoresRef, orderBy('highScore', 'desc'), limit(10));
-            const querySnapshot = await getDocs(q);
+            const highscoresRef = ref(this.db, 'players');
+            const highscoresQuery = query(highscoresRef, 
+                orderByChild('highScore'),
+                limitToLast(10)
+            );
             
+            const snapshot = await get(highscoresQuery);
             const highscores = [];
-            querySnapshot.forEach(function(doc) {
-                highscores.push(doc.data());
-            });
+            
+            if (snapshot.exists()) {
+                // Konvertiere die Daten in ein Array und sortiere absteigend
+                snapshot.forEach(function(childSnapshot) {
+                    highscores.push(childSnapshot.val());
+                });
+                highscores.sort(function(a, b) {
+                    return b.highScore - a.highScore;
+                });
+            }
             
             return highscores;
         } catch (error) {
