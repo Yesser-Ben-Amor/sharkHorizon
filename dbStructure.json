@@ -1,0 +1,34 @@
+{
+    "players": {
+        "$playerId": {
+            "nickname": "string",
+            "score": "number",
+            "highScore": "number",
+            "lives": "number",
+            "lastPlayed": "timestamp"
+        }
+    },
+    "gameState": {
+        "$playerId": {
+            "position": {
+                "x": "number",
+                "y": "number"
+            },
+            "currentLevel": "number",
+            "collectedCoins": "number",
+            "health": "number",
+            "powerUps": {
+                "shield": "boolean",
+                "speedBoost": "boolean"
+            }
+        }
+    },
+    "highscores": {
+        "$scoreId": {
+            "playerId": "string",
+            "nickname": "string",
+            "score": "number",
+            "timestamp": "timestamp"
+        }
+    }
+}
