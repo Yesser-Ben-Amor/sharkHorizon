@@ -1,6 +1,6 @@
 // Import Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-import { getDatabase, ref, set, get, query, orderByChild, limitToLast } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
+import { getDatabase, ref, set, get, push, query, orderByChild, limitToLast, update } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
 
 class DatabaseManager {
     constructor() {
@@ -20,53 +20,158 @@ class DatabaseManager {
         this.db = getDatabase(app);
     }
 
-    async speichereDaten(collection, id, data) {
+    // Player Management
+    async createPlayer(nickname) {
         try {
-            const reference = ref(this.db, `${collection}/${id}`);
-            await set(reference, data);
+            const playerData = {
+                nickname: nickname,
+                score: 0,
+                highScore: 0,
+                lives: 3,
+                lastPlayed: Date.now(),
+                position: { x: 0, y: 0 },
+                currentLevel: 1,
+                collectedCoins: 0,
+                health: 100,
+                powerUps: {
+                    shield: { active: false, duration: 0 },
+                    speedBoost: { active: false, cooldown: 0 }
+                }
+            };
+
+            const playerRef = ref(this.db, 'players');
+            const newPlayerRef = push(playerRef);
+            await set(newPlayerRef, playerData);
+            return newPlayerRef.key;
+        } catch (error) {
+            console.error('Fehler beim Erstellen des Spielers:', error);
+            return null;
+        }
+    }
+
+    async updatePlayer(playerId, data) {
+        try {
+            const updates = {};
+            for (const [key, value] of Object.entries(data)) {
+                updates[`players/${playerId}/${key}`] = value;
+            }
+            await update(ref(this.db), updates);
             return true;
         } catch (error) {
-            console.error(`Fehler beim Speichern in ${collection}:`, error);
+            console.error('Fehler beim Aktualisieren des Spielers:', error);
             return false;
         }
     }
 
-    async ladeDaten(collection, id) {
+    async getPlayer(playerId) {
         try {
-            const reference = ref(this.db, `${collection}/${id}`);
-            const snapshot = await get(reference);
-            
-            if (snapshot.exists()) {
-                return snapshot.val();
-            }
-            return null;
+            const playerRef = ref(this.db, `players/${playerId}`);
+            const snapshot = await get(playerRef);
+            return snapshot.exists() ? snapshot.val() : null;
         } catch (error) {
-            console.error(`Fehler beim Laden aus ${collection}:`, error);
+            console.error('Fehler beim Laden des Spielers:', error);
             return null;
         }
     }
 
-    async ladeHighscoreListe() {
+    // Game State Management
+    async createGameState(playerId) {
         try {
-            const highscoresRef = ref(this.db, 'players');
-            const highscoresQuery = query(highscoresRef, 
-                orderByChild('highScore'),
-                limitToLast(10)
+            const gameData = {
+                players: {
+                    [playerId]: {
+                        score: 0,
+                        currentLevel: 1,
+                        position: { x: 0, y: 0 },
+                        collectedCoins: 0,
+                        health: 100,
+                        powerUps: {
+                            shield: { active: false, duration: 0 },
+                            speedBoost: { active: false, cooldown: 0 }
+                        }
+                    }
+                },
+                status: 'running',
+                currentLevel: 1,
+                timestamp: Date.now()
+            };
+
+            const gameRef = ref(this.db, 'gameState');
+            const newGameRef = push(gameRef);
+            await set(newGameRef, gameData);
+            return newGameRef.key;
+        } catch (error) {
+            console.error('Fehler beim Erstellen des Spielzustands:', error);
+            return null;
+        }
+    }
+
+    async updateGameState(gameId, playerId, data) {
+        try {
+            const updates = {};
+            for (const [key, value] of Object.entries(data)) {
+                updates[`gameState/${gameId}/players/${playerId}/${key}`] = value;
+            }
+            await update(ref(this.db), updates);
+            return true;
+        } catch (error) {
+            console.error('Fehler beim Aktualisieren des Spielzustands:', error);
+            return false;
+        }
+    }
+
+    async getGameState(gameId) {
+        try {
+            const gameRef = ref(this.db, `gameState/${gameId}`);
+            const snapshot = await get(gameRef);
+            return snapshot.exists() ? snapshot.val() : null;
+        } catch (error) {
+            console.error('Fehler beim Laden des Spielzustands:', error);
+            return null;
+        }
+    }
+
+    // Highscore Management
+    async addHighscore(playerId, nickname, score) {
+        try {
+            const highscoreData = {
+                playerId: playerId,
+                nickname: nickname,
+                score: score,
+                timestamp: Date.now()
+            };
+
+            const highscoreRef = ref(this.db, 'highscores');
+            const newHighscoreRef = push(highscoreRef);
+            await set(newHighscoreRef, highscoreData);
+            return true;
+        } catch (error) {
+            console.error('Fehler beim Speichern des Highscores:', error);
+            return false;
+        }
+    }
+
+    async getHighscores(limit = 10) {
+        try {
+            const highscoresRef = ref(this.db, 'highscores');
+            const highscoresQuery = query(
+                highscoresRef,
+                orderByChild('score'),
+                limitToLast(limit)
             );
-            
+
             const snapshot = await get(highscoresQuery);
             const highscores = [];
-            
+
             if (snapshot.exists()) {
-                // Konvertiere die Daten in ein Array und sortiere absteigend
                 snapshot.forEach(function(childSnapshot) {
                     highscores.push(childSnapshot.val());
                 });
                 highscores.sort(function(a, b) {
-                    return b.highScore - a.highScore;
+                    return b.score - a.score;
                 });
             }
-            
+
             return highscores;
         } catch (error) {
             console.error('Fehler beim Laden der Highscore-Liste:', error);
