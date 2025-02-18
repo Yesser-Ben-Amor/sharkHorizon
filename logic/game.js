@@ -1,11 +1,21 @@
+// Import der Models
+import Player from '../models/player.class.js';
+
 let canvas;
 let ctx;
 let character = new Image();
+let player;
 
 function init() {
     canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
     character.src = 'views/img/1.Sharkie/1.IDLE/1.png';
+    
+    // Initialisiere den Spieler
+    player = new Player('Player1');
+    player.ladePlayerDaten().then(() => {
+        console.log('Spielerdaten geladen');
+    });
     
     // Starte den Game Loop sobald das Bild geladen ist
     character.onload = function() {
@@ -31,3 +41,6 @@ function gameLoop() {
     // Request next frame
     requestAnimationFrame(gameLoop);
 }
+
+// Exportiere die init Funktion
+export { init };
