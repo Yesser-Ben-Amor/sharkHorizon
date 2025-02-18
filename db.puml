@@ -1,0 +1,70 @@
+@startuml Database Structure
+
+entity "players" {
+  * $playerId : string
+  * nickname : string
+  * score : number
+  * highScore : number
+  * lives : number
+  * lastPlayed : timestamp
+  * position : object
+  ** position.x : number
+  ** position.y : number
+  * currentLevel : number
+  * collectedCoins : number
+  * health : number
+  * powerUps : object
+  ** powerUps.shield.active : boolean
+  ** powerUps.shield.duration : number
+  ** powerUps.speedBoost.active : boolean
+  ** powerUps.speedBoost.cooldown : number
+}
+
+entity "highscores" {
+  * $scoreId : string
+  * playerId : string
+  * nickname : string
+  * score : number
+  * timestamp : timestamp
+}
+
+entity "gameState" {
+  * $gameId : string
+  * status : string
+  * currentLevel : number
+  * timestamp : timestamp
+  * players : object
+}
+
+entity "gameState.players" {
+  * $playerId : string
+  * score : number
+  * currentLevel : number
+  * position : object
+  ** position.x : number
+  ** position.y : number
+  * collectedCoins : number
+  * health : number
+  * powerUps : object
+  ** powerUps.shield.active : boolean
+  ** powerUps.shield.duration : number
+  ** powerUps.speedBoost.active : boolean
+  ** powerUps.speedBoost.cooldown : number
+}
+
+players ||--o| highscores : has
+gameState ||--o| gameState.players : contains
+
+note right of players
+    Stored under /players/$playerId
+end note
+
+note right of highscores
+    Stored under /highscores/$scoreId
+end note
+
+note right of gameState
+    Stored under /gameState/$gameId
+end note
+
+@enduml
