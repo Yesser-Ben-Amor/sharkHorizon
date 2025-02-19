@@ -5,11 +5,11 @@ import { Player } from '../models/player.class.js';
 import { Fisch } from '../models/fisch.class.js';
 
 // Game Variablen
-let canvas;
-let ctx;
-let character = new Entity();  // Default-Werte werden verwendet (x=120, y=400)
-let player;
-let enemies = [
+export let canvas;
+export let ctx;
+export let character = new Entity();  // Default-Werte werden verwendet (x=120, y=400)
+export let player;
+export let enemies = [
     new Fisch(100, 200, 1, 2, 10),  // x, y, größe, geschwindigkeit, punkte
     new Fisch(150, 300, 1, 2, 10),
     new Fisch(200, 400, 1, 2, 10),
