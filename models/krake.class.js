@@ -1,17 +1,17 @@
 import Gegner from './gegner.class.js';
 
 class Krake extends Gegner {
-    constructor(x, y, stärke, leben, geschwindigkeit, tentakelAnzahl) {
-        super(x, y, stärke, leben, geschwindigkeit);
-        this.tentakelAnzahl = tentakelAnzahl;
+    tintenangriff = false;
+
+    constructor(x, y, stärke, leben) {
+        super(x, y, stärke, leben);
     }
 
-    festhalten(hai) {
-        // Implementierung des Festhaltens
-    }
-
-    tinteWerfen() {
-        // Implementierung des Tinte-Werfens
+    verwirren(hai) {
+        // Implementierung der Verwirrung
+        if (this.tintenangriff) {
+            // Verwirrungslogik hier implementieren
+        }
     }
 }
 
