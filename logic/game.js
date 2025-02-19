@@ -1,11 +1,14 @@
-// Import der Models
-import Entity from '../models/entity.class.js';
-import Player from '../models/player.class.js';
-
+// Game Variablen
 let canvas;
 let ctx;
-let character = new Entity();
+let character = new Entity(120, 400);  // x, y Koordinaten übergeben
 let player;
+let enemies = [
+    new Fisch(100, 200, 1, 2, 10),  // x, y, größe, geschwindigkeit, punkte
+    new Fisch(150, 300, 1, 2, 10),
+    new Fisch(200, 400, 1, 2, 10),
+    new Krake(300, 400, 10, 100),  // x, y, stärke, leben
+];
 
 function init() {
     canvas = document.getElementById('gameCanvas');

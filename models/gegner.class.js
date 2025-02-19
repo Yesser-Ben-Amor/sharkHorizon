@@ -1,15 +1,14 @@
 import Entity from './entity.class.js';
 
 class Gegner extends Entity {
-    constructor(x, y, stärke, leben, geschwindigkeit) {
+    constructor(x, y, stärke, leben) {
         super(x, y);
         this.stärke = stärke;
         this.leben = leben;
-        this.geschwindigkeit = geschwindigkeit;
     }
 
     angreifen(hai) {
-        // Basis-Implementierung des Angriffs
+        // Implementierung des Angriffs
     }
 }
 
