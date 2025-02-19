@@ -1,6 +1,6 @@
-import Gegner from './gegner.class.js';
+import { Gegner } from './gegner.class.js';
 
-class TiefseeKreatur extends Gegner {
+class Tiefseekreatur extends Gegner {
     constructor(x, y, stärke, leben, geschwindigkeit, sichtbarkeit) {
         super(x, y, stärke, leben, geschwindigkeit);
         this.sichtbarkeit = sichtbarkeit;
@@ -15,4 +15,4 @@ class TiefseeKreatur extends Gegner {
     }
 }
 
-export default TiefseeKreatur;
+export default Tiefseekreatur;

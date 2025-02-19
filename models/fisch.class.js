@@ -1,6 +1,6 @@
 import { Entity } from './entity.class.js';
 
-class Fisch extends Entity {
+export class Fisch extends Entity {
     constructor(x, y, größe, geschwindigkeit, punkte) {
         super(x, y);
         this.größe = größe;
@@ -12,5 +12,3 @@ class Fisch extends Entity {
         // Implementierung der Schwimm-Bewegung
     }
 }
-
-export default Fisch;
