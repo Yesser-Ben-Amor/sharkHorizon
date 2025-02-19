@@ -34,9 +34,13 @@ function init() {
         
         // Initialisiere den Spieler
         player = new Player('Player1');
-        player.ladePlayerDaten().catch(function(error) {
-            console.error('Fehler beim Laden der Spielerdaten:', error);
-        });
+        
+        // Mache die Variablen global verfügbar
+        window.canvas = canvas;
+        window.ctx = ctx;
+        window.character = character;
+        window.player = player;
+        window.enemies = enemies;
         
     } catch (error) {
         console.error('Fehler bei der Spielinitialisierung:', error);
@@ -50,7 +54,7 @@ function gameLoop() {
     
     // Draw character
     if (character.img) {
-        ctx.drawImage(character.img, 20, 20, 150, 350);
+        ctx.drawImage(character.img, character.position.x, character.position.y);
     }
     
     // Draw enemies
