@@ -13,7 +13,7 @@ function init() {
         ctx = canvas.getContext('2d');
         
         // Initialisiere Spielobjekte
-        character = new Entity();  // Default-Werte werden verwendet (x=120, y=400)
+        character = new Entity(120, 400);  // Explizite x,y Position
         enemies = [
             new Fisch(100, 200, 1, 2, 10),  // x, y, größe, geschwindigkeit, punkte
             new Fisch(150, 300, 1, 2, 10),
@@ -28,6 +28,8 @@ function init() {
         characterImg.onload = function() {
             character.img = characterImg;
             console.log('Character image loaded');
+            console.log('Character position:', character.position);
+            console.log('Drawing character at:', character.position.x, character.position.y);
             gameLoop();
         };
         characterImg.src = 'views/img/1.Sharkie/1.IDLE/1.png';
@@ -54,7 +56,11 @@ function gameLoop() {
     
     // Draw character
     if (character.img) {
-        ctx.drawImage(character.img, character.position.x, character.position.y);
+        ctx.drawImage(character.img, character.position.x, character.position.y, 150, 150);  // Feste Größe für den Hai
+        
+        // Debug Rectangle um den Hai
+        ctx.strokeStyle = 'red';
+        ctx.strokeRect(character.position.x, character.position.y, 150, 150);
     }
     
     // Draw enemies
