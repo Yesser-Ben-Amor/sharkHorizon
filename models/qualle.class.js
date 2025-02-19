@@ -1,14 +1,15 @@
-import { Gegner } from './gegner.class.js';
-
 class Qualle extends Gegner {
     constructor(x, y, stärke, leben, geschwindigkeit, giftig) {
-        super(x, y, stärke, leben, geschwindigkeit);
+        super(x, y, stärke, leben);
+        this.geschwindigkeit = geschwindigkeit;
         this.giftig = giftig;
     }
 
-    elektrisieren(hai) {
-        // Implementierung des Elektrisierens
+    pulsieren() {
+        // Implementierung der Pulsier-Bewegung
+    }
+
+    vergiften(hai) {
+        // Implementierung des Giftangriffs
     }
 }
-
-export default Qualle;

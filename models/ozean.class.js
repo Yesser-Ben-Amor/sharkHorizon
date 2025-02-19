@@ -1,24 +1,24 @@
 class Ozean {
-    constructor(größe, hintergrund) {
-        this.größe = größe;
-        this.hintergrund = hintergrund;
+    constructor(breite, höhe, tiefe) {
+        this.breite = breite;
+        this.höhe = höhe;
+        this.tiefe = tiefe;
+        this.strömungen = [];
         this.hindernisse = [];
-        this.fische = [];
-        this.gegner = [];
-        this.coins = [];
     }
 
-    spawneFisch() {
-        // Implementierung der Fisch-Generierung
+    strömungHinzufügen(x, y, stärke, richtung) {
+        this.strömungen.push({
+            position: { x, y },
+            stärke,
+            richtung
+        });
     }
 
-    spawneGegner() {
-        // Implementierung der Gegner-Generierung
-    }
-
-    spawneCoin() {
-        // Implementierung der Coin-Generierung
+    hindernisHinzufügen(x, y, größe) {
+        this.hindernisse.push({
+            position: { x, y },
+            größe
+        });
     }
 }
-
-export default Ozean;

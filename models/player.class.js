@@ -2,57 +2,52 @@ class Player {
     constructor(nickname) {
         this.nickname = nickname;
         this.score = 0;
-        this.highScore = 0;
-        this.verfügbareLeben = 3;
+        this.level = 1;
+        this.highscore = 0;
+        this.coins = 0;
+        this.leben = 100;
+        this.munition = 20;
     }
 
     async ladePlayerDaten() {
-        try {
-            const data = await window.databaseManager.ladeDaten('players', this.nickname);
-            if (data) {
-                this.highScore = data.highScore;
-                return true;
-            }
-        } catch (error) {
-            console.error('Fehler beim Laden der Spielerdaten:', error);
-        }
-        return false;
-    }
-
-    async speicherePlayerDaten() {
-        try {
-            const playerData = {
-                nickname: this.nickname,
-                highScore: this.highScore,
-                lastScore: this.score
-            };
-            await window.databaseManager.speichereDaten('players', this.nickname, playerData);
-            return true;
-        } catch (error) {
-            console.error('Fehler beim Speichern der Spielerdaten:', error);
-            return false;
-        }
-    }
-
-    aktualisiereHighScore() {
-        if (this.score > this.highScore) {
-            this.highScore = this.score;
-            this.speicherePlayerDaten();
-        }
-    }
-
-    verliereLeben() {
-        if (this.verfügbareLeben > 0) {
-            this.verfügbareLeben--;
-            return this.verfügbareLeben;
-        }
-        return 0;
+        // Hier würde normalerweise der Code zum Laden der Spielerdaten stehen
+        return Promise.resolve();
     }
 
     erhöheScore(punkte) {
         this.score += punkte;
         this.aktualisiereHighScore();
     }
-}
 
-export default Player;
+    erhöheLevel() {
+        this.level++;
+    }
+
+    sammleCoin() {
+        this.coins++;
+    }
+
+    nimmSchaden(schaden) {
+        this.leben -= schaden;
+        if (this.leben < 0) this.leben = 0;
+    }
+
+    heile(heilung) {
+        this.leben += heilung;
+        if (this.leben > 100) this.leben = 100;
+    }
+
+    schießen() {
+        if (this.munition > 0) {
+            this.munition--;
+            return true;
+        }
+        return false;
+    }
+
+    aktualisiereHighScore() {
+        if (this.score > this.highscore) {
+            this.highscore = this.score;
+        }
+    }
+}

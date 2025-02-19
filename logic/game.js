@@ -20,9 +20,17 @@ function init() {
             new Fisch(200, 400, 1, 2, 10),
             new Krake(300, 400, 10, 100),  // x, y, stärke, leben
         ];
+        console.log('Character:', character);
+        console.log('Enemies:', enemies);
         
         // Lade das Charakter-Bild
-        character.src = 'views/img/1.Sharkie/1.IDLE/1.png';
+        let characterImg = new Image();
+        characterImg.onload = function() {
+            character.img = characterImg;
+            console.log('Character image loaded');
+            gameLoop();
+        };
+        characterImg.src = 'views/img/1.Sharkie/1.IDLE/1.png';
         
         // Initialisiere den Spieler
         player = new Player('Player1');
@@ -30,31 +38,28 @@ function init() {
             console.error('Fehler beim Laden der Spielerdaten:', error);
         });
         
-        // Starte den Game Loop sobald das Bild geladen ist
-        character.onload = function() {
-            console.log('Character image loaded');
-            gameLoop();
-        };
     } catch (error) {
         console.error('Fehler bei der Spielinitialisierung:', error);
     }
 }
 
-// Game loop
+// Game Loop
 function gameLoop() {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Draw character in the canvas
-    let x = 20;
-    let y = 20;
-    let z = 150;
-    let w = 350;
-    ctx.drawImage(character, x, y, z, w);
+    // Draw character
+    if (character.img) {
+        ctx.drawImage(character.img, 20, 20, 150, 350);
+    }
+    
+    // Draw enemies
+    enemies.forEach(enemy => {
+        // Hier würde normalerweise das Enemy-Bild gezeichnet
+        ctx.fillStyle = 'red';
+        ctx.fillRect(enemy.position.x, enemy.position.y, 30, 30);
+    });
     
     // Request next frame
     requestAnimationFrame(gameLoop);
 }
-
-// Event Listener für Spielstart
-window.addEventListener('load', init);

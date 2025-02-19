@@ -1,8 +1,7 @@
-import { Gegner } from './gegner.class.js';
-
 class Tiefseekreatur extends Gegner {
     constructor(x, y, stärke, leben, geschwindigkeit, sichtbarkeit) {
-        super(x, y, stärke, leben, geschwindigkeit);
+        super(x, y, stärke, leben);
+        this.geschwindigkeit = geschwindigkeit;
         this.sichtbarkeit = sichtbarkeit;
     }
 
@@ -10,9 +9,11 @@ class Tiefseekreatur extends Gegner {
         this.sichtbarkeit = 0;
     }
 
+    erscheinen() {
+        this.sichtbarkeit = 1;
+    }
+
     überraschungsangriff(hai) {
         // Implementierung des Überraschungsangriffs
     }
 }
-
-export default Tiefseekreatur;

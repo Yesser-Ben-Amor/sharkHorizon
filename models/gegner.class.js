@@ -1,6 +1,4 @@
-import { Entity } from './entity.class.js';
-
-export class Gegner extends Entity {
+class Gegner extends Entity {
     constructor(x, y, stärke, leben) {
         super(x, y);
         this.stärke = stärke;
@@ -11,3 +9,6 @@ export class Gegner extends Entity {
         // Implementierung des Angriffs
     }
 }
+
+// Mache die Klasse global verfügbar
+window.Gegner = Gegner;

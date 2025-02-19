@@ -1,5 +1,3 @@
-import { Entity } from './entity.class.js';
-
 class Hai extends Entity {
     constructor(x, y, größe, geschwindigkeit) {
         super(x, y);
@@ -31,5 +29,3 @@ class Hai extends Entity {
         return this.leben <= 0;
     }
 }
-
-export default Hai;

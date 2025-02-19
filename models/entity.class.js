@@ -1,4 +1,4 @@
-export class Entity {
+class Entity {
     //Default Werte
     x=120;
     y=400;

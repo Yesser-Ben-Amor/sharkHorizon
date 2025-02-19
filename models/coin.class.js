@@ -1,14 +1,15 @@
-import { Entity } from './entity.class.js';
-
 class Coin extends Entity {
     constructor(x, y, wert) {
         super(x, y);
         this.wert = wert;
     }
 
-    einsammeln(hai) {
-        hai.sammleCoin(this);
+    einsammeln() {
+        // Implementierung des Einsammelns
+        return this.wert;
+    }
+
+    animieren() {
+        // Implementierung der Münz-Animation
     }
 }
-
-export default Coin;
