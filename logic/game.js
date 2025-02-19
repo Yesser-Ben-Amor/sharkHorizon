@@ -1,7 +1,7 @@
 // Game Variablen
 let canvas;
 let ctx;
-let character = new Entity(120, 400);  // x, y Koordinaten übergeben
+let character = new Entity();  // Default-Werte werden verwendet (x=120, y=400)
 let player;
 let enemies = [
     new Fisch(100, 200, 1, 2, 10),  // x, y, größe, geschwindigkeit, punkte
