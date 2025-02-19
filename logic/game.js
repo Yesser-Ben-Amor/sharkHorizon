@@ -57,10 +57,6 @@ function gameLoop() {
     // Draw character
     if (character.img) {
         ctx.drawImage(character.img, character.position.x, character.position.y, 150, 150);  // Feste Größe für den Hai
-        
-        // Debug Rectangle um den Hai
-        ctx.strokeStyle = 'red';
-        ctx.strokeRect(character.position.x, character.position.y, 150, 150);
     }
     
     // Draw enemies
