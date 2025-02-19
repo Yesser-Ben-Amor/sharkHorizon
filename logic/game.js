@@ -16,6 +16,7 @@ export let enemies = [
     new Krake(300, 400, 10, 100),  // x, y, stärke, leben
 ];
 
+// Initialisierung
 function init() {
     canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
@@ -67,6 +68,12 @@ function gameLoop() {
     // Request next frame
     requestAnimationFrame(gameLoop);
 }
+
+// Event Listener für Spielstart
+window.addEventListener('load', init);
+
+// Exportiere die Spielvariablen
+export { canvas, ctx, character, player, enemies };
 
 // Exportiere die init Funktion
 export { init };
