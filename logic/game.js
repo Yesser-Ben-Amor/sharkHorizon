@@ -1,9 +1,10 @@
 // Import der Models
+import Entity from '../models/entity.class.js';
 import Player from '../models/player.class.js';
 
 let canvas;
 let ctx;
-let character = new Image();
+let character = new Entity();
 let player;
 
 function init() {
@@ -15,6 +16,8 @@ function init() {
     });
     
     console.log('Game initialization started');
+    console.log('My character:', character);
+
 }
 
 async function initializeGame() {
