@@ -3,6 +3,8 @@ class Entity {
     x=120;
     y=400;
     img;
+    größe = 1;
+    geschwindigkeit = 1;
     constructor(x, y) {
         this.position = { x, y };
     }
