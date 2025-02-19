@@ -2,36 +2,33 @@
  * Debug-Modul für Entwicklungszwecke
  * Ermöglicht den Zugriff auf Spielvariablen in der Konsole
  */
-import { enemies, character, player } from './game.js';
 
 // Debug-Funktionen
-export function getEnemies() {
-    return enemies;
+function getEnemies() {
+    return window.enemies;
 }
 
-export function getCharacter() {
-    return character;
+function getCharacter() {
+    return window.character;
 }
 
-export function getPlayer() {
-    return player;
+function getPlayer() {
+    return window.player;
 }
 
 // Debug-Informationen
-export function printGameState() {
+function printGameState() {
     console.log('Game State:', {
-        enemies: enemies,
-        character: character,
-        player: player
+        enemies: window.enemies,
+        character: window.character,
+        player: window.player
     });
 }
 
-// Füge die Debug-Funktionen dem window-Objekt hinzu, wenn wir im Debug-Modus sind
-if (process.env.NODE_ENV !== 'production') {
-    window.debug = {
-        getEnemies,
-        getCharacter,
-        getPlayer,
-        printGameState
-    };
-}
+// Füge die Debug-Funktionen dem window-Objekt hinzu
+window.debug = {
+    getEnemies,
+    getCharacter,
+    getPlayer,
+    printGameState
+};
