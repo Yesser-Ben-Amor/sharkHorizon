@@ -1,6 +1,6 @@
-import Gegner from './gegner.class.js';
+import { Gegner } from './gegner.class.js';
 
-class Krake extends Gegner {
+export class Krake extends Gegner {
     tintenangriff = false;
 
     constructor(x, y, stärke, leben) {
@@ -14,5 +14,3 @@ class Krake extends Gegner {
         }
     }
 }
-
-export default Krake;

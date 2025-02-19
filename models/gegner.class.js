@@ -1,6 +1,6 @@
-import Entity from './entity.class.js';
+import { Entity } from './entity.class.js';
 
-class Gegner extends Entity {
+export class Gegner extends Entity {
     constructor(x, y, stärke, leben) {
         super(x, y);
         this.stärke = stärke;
@@ -11,5 +11,3 @@ class Gegner extends Entity {
         // Implementierung des Angriffs
     }
 }
-
-export default Gegner;

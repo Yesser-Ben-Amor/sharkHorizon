@@ -1,4 +1,4 @@
-import Entity from './entity.class.js';
+import { Entity } from './entity.class.js';
 
 class Fisch extends Entity {
     constructor(x, y, größe, geschwindigkeit, punkte) {
