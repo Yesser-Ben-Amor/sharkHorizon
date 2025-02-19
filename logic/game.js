@@ -1,3 +1,9 @@
+// Import der Models
+import { Entity } from '../models/entity.class.js';
+import { Krake } from '../models/krake.class.js';
+import { Player } from '../models/player.class.js';
+import { Fisch } from '../models/fisch.class.js';
+
 // Game Variablen
 let canvas;
 let ctx;

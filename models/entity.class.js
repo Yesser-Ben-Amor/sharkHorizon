@@ -1,4 +1,4 @@
-class Entity {
+export class Entity {
     //Default Werte
     x=120;
     y=400;
@@ -14,5 +14,3 @@ class Entity {
         this.position.y += dy;
     }
 }
-
-export default Entity;
