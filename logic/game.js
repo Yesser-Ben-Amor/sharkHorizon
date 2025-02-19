@@ -1,15 +1,9 @@
-// Import der Models
-import { Entity } from '../models/entity.class.js';
-import { Krake } from '../models/krake.class.js';
-import { Player } from '../models/player.class.js';
-import { Fisch } from '../models/fisch.class.js';
-
 // Game Variablen
-export let canvas;
-export let ctx;
-export let character = new Entity();  // Default-Werte werden verwendet (x=120, y=400)
-export let player;
-export let enemies = [
+let canvas;
+let ctx;
+let character = new Entity();  // Default-Werte werden verwendet (x=120, y=400)
+let player;
+let enemies = [
     new Fisch(100, 200, 1, 2, 10),  // x, y, größe, geschwindigkeit, punkte
     new Fisch(150, 300, 1, 2, 10),
     new Fisch(200, 400, 1, 2, 10),
@@ -71,9 +65,3 @@ function gameLoop() {
 
 // Event Listener für Spielstart
 window.addEventListener('load', init);
-
-// Exportiere die Spielvariablen
-export { canvas, ctx, character, player, enemies };
-
-// Exportiere die init Funktion
-export { init };
