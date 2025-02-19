@@ -5,7 +5,7 @@ class Entity {
     img;
     größe = 1;
     geschwindigkeit = 1;
-    constructor(x, y) {
+    constructor(x = 120, y = 400) {
         this.position = { x, y };
     }
 
