@@ -19,12 +19,13 @@ class DatabaseManager {
 
 class Entity {
     - position: Object
+    - größe: Number
+    - geschwindigkeit: Number
+    - img: String
     + bewegen()
 }
 
 class Hai {
-    - größe: Number
-    - geschwindigkeit: Number
     - leben: Number
     - lebenAnzahl: Number
     - coins: Number
@@ -36,8 +37,6 @@ class Hai {
 }
 
 class Fisch {
-    - größe: Number
-    - geschwindigkeit: Number
     - punkte: Number
     + schwimmen()
 }
@@ -45,8 +44,22 @@ class Fisch {
 class Gegner {
     - stärke: Number
     - leben: Number
-    - geschwindigkeit: Number
     + angreifen(hai: Hai)
+}
+
+class Krake {
+    - tintenangriff: Boolean
+    + verwirren(hai: Hai)
+}
+
+class Barrakuda {
+    - bisskraft: Number
+    + blitzangriff(hai: Hai)
+}
+
+class GiftigerFisch {
+    - giftLevel: Number
+    + vergiften(hai: Hai)
 }
 
 class Coin {
@@ -57,6 +70,7 @@ class Coin {
 class Ozean {
     - größe: Number
     - hintergrund: String
+    - img: String
     - hindernisse: Array
     - fische: Array
     - gegner: Array
@@ -70,6 +84,10 @@ Entity <|-- Hai
 Entity <|-- Fisch
 Entity <|-- Gegner
 Entity <|-- Coin
+
+Gegner <|-- Krake
+Gegner <|-- Barrakuda
+Gegner <|-- GiftigerFisch
 
 Hai --> Fisch : frisst >
 Hai --> Gegner : kämpft gegen >
