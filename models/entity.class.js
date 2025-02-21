@@ -18,8 +18,13 @@ class Entity {
      */
     loadImage(path) {
         let img = new Image();
+        img.onload = () => {
+            this.img = img;
+            console.log('Bild geladen:', path);
+        };
+        img.onerror = () => {
+            console.error('Fehler beim Laden des Bildes:', path);
+        };
         img.src = path;
-        this.img = img;
-        console.log('Bild geladen:', path);
     }
 }
