@@ -20,12 +20,13 @@ function init() {
         // Initialisiere Spielobjekte
         character = new Hai(120, 400, 1, 1);
         
+        // Logging
         console.log('Canvas dimensions:', canvas.width, canvas.height);
         console.log('Character:', character);
         console.log('Enemies:', enemies);
         console.log('Player:', player);
         
-        // Debug: Mache Objekte global verfügbar
+        // Mache wichtige Spielvariablen global verfügbar für Debug-Zwecke
         window.canvas = canvas;
         window.character = character;
         window.player = player;
