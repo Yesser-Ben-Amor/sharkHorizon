@@ -7,7 +7,7 @@ let enemies = [
     new Fisch(800, 100, 1, 2, 10),  // Oben
     new Fisch(800, 250, 1, 2, 10),  // Mitte-oben
     new Fisch(800, 400, 1, 2, 10),  // Mitte-unten
-    new Krake(800, 550, 10, 100),   // Unten
+    new Krake(750, 500, 10, 100),   // Unten, 50px vom rechten Rand entfernt
 ];
 
 // Initialisierung
