@@ -1,6 +1,7 @@
 class Hai extends Entity {
     constructor(x, y, größe, geschwindigkeit) {
         super(x, y);
+        super.loadImage('views/img/1.Sharkie/1.IDLE/1.png');
         this.größe = größe;
         this.geschwindigkeit = geschwindigkeit;
         this.leben = 3;
