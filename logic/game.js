@@ -53,9 +53,9 @@ function gameLoop() {
     
     // Draw enemies
     enemies.forEach(enemy => {
-        // Hier würde normalerweise das Enemy-Bild gezeichnet
-        ctx.fillStyle = 'red';
-        ctx.fillRect(enemy.position.x, enemy.position.y, 30, 30);
+        if (enemy.img) {
+            ctx.drawImage(enemy.img, enemy.position.x, enemy.position.y, 100, 100);  // Angepasste Größe für Gegner
+        }
     });
     
     // Request next frame
