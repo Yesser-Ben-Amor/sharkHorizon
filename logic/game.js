@@ -4,10 +4,10 @@ let ctx;
 let character;
 let player = new Player('Player1');
 let enemies = [
-    new Fisch(100, 200, 1, 2, 10),  // x, y, größe, geschwindigkeit, punkte
-    new Fisch(150, 300, 1, 2, 10),
-    new Fisch(200, 400, 1, 2, 10),
-    new Krake(300, 400, 10, 100),  // x, y, stärke, leben
+    new Fisch(800, 100, 1, 2, 10),  // Oben
+    new Fisch(800, 250, 1, 2, 10),  // Mitte-oben
+    new Fisch(800, 400, 1, 2, 10),  // Mitte-unten
+    new Krake(800, 550, 10, 100),   // Unten
 ];
 
 // Initialisierung
