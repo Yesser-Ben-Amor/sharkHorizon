@@ -20,5 +20,6 @@ class Entity {
         let img = new Image();
         img.src = path;
         this.img = img;
+        console.log('Bild geladen:', path);
     }
 }

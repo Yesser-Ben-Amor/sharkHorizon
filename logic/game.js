@@ -23,17 +23,6 @@ function init() {
         console.log('Character:', character);
         console.log('Enemies:', enemies);
         
-        // Lade das Charakter-Bild
-        let characterImg = new Image();
-        characterImg.onload = function() {
-            character.img = characterImg;
-            console.log('Character image loaded');
-            console.log('Character position:', character.position);
-            console.log('Drawing character at:', character.position.x, character.position.y);
-            gameLoop();
-        };
-        characterImg.src = 'views/img/1.Sharkie/1.IDLE/1.png';
-        
         // Initialisiere den Spieler
         player = new Player('Player1');
         
@@ -43,6 +32,9 @@ function init() {
         window.character = character;
         window.player = player;
         window.enemies = enemies;
+        
+        // Starte den Game Loop direkt nach der Character-Initialisierung
+        gameLoop();
         
     } catch (error) {
         console.error('Fehler bei der Spielinitialisierung:', error);
