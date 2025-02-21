@@ -11,4 +11,14 @@ class Entity {
         this.position.x += dx;
         this.position.y += dy;
     }
+
+    /**
+     * Lädt ein Bild für die Entity
+     * @param {string} path - Der Pfad zum Bild
+     */
+    loadImage(path) {
+        let img = new Image();
+        img.src = path;
+        this.img = img;
+    }
 }
