@@ -9,11 +9,11 @@ let enemies;
 function init() {
     console.log('Game initialization started');
     try {
-        canvas = document.getElementById('gameCanvas');
+        canvas = document.getElementById('canvas');
         ctx = canvas.getContext('2d');
         
         // Initialisiere Spielobjekte
-        character = new Entity(120, 400);  // Explizite x,y Position
+        character = new Hai(120, 400, 1, 1);  // x, y, größe, geschwindigkeit
         enemies = [
             new Fisch(100, 200, 1, 2, 10),  // x, y, größe, geschwindigkeit, punkte
             new Fisch(150, 300, 1, 2, 10),
