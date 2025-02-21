@@ -3,7 +3,7 @@ class Krake extends Gegner {
 
     constructor(x, y, stärke, leben) {
         super(x, y, stärke, leben);
-        super.loadImage('views/img/2.Enemy/krake.jpeg');
+        super.loadImage('views/img/2.Enemy/krk.jpeg');
     }
 
     verwirren(hai) {

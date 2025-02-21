@@ -3,7 +3,12 @@ let canvas;
 let ctx;
 let character;
 let player;
-let enemies;
+let enemies = [
+    new Fisch(100, 200, 1, 2, 10),  // x, y, größe, geschwindigkeit, punkte
+    new Fisch(150, 300, 1, 2, 10),
+    new Fisch(200, 400, 1, 2, 10),
+    new Krake(300, 400, 10, 100),  // x, y, stärke, leben
+];
 
 // Initialisierung
 function init() {
@@ -14,12 +19,7 @@ function init() {
         
         // Initialisiere Spielobjekte
         character = new Hai(120, 400, 1, 1);  // x, y, größe, geschwindigkeit
-        enemies = [
-            new Fisch(100, 200, 1, 2, 10),  // x, y, größe, geschwindigkeit, punkte
-            new Fisch(150, 300, 1, 2, 10),
-            new Fisch(200, 400, 1, 2, 10),
-            new Krake(300, 400, 10, 100),  // x, y, stärke, leben
-        ];
+        
         console.log('Character:', character);
         console.log('Enemies:', enemies);
         
@@ -54,7 +54,22 @@ function gameLoop() {
     // Draw enemies
     enemies.forEach(enemy => {
         if (enemy.img) {
-            ctx.drawImage(enemy.img, enemy.position.x, enemy.position.y, 100, 100);  // Angepasste Größe für Gegner
+            if (enemy instanceof Krake) {
+                // Runden Kraken zeichnen
+                ctx.save();
+                ctx.beginPath();
+                let x = enemy.position.x + 50;  // Mittelpunkt X
+                let y = enemy.position.y + 50;  // Mittelpunkt Y
+                let radius = 50;                // Radius für den Kreis
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+                ctx.drawImage(enemy.img, enemy.position.x, enemy.position.y, 100, 100);
+                ctx.restore();
+            } else {
+                // Andere Gegner normal zeichnen
+                ctx.drawImage(enemy.img, enemy.position.x, enemy.position.y, 100, 100);
+            }
         }
     });
     
