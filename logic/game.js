@@ -14,7 +14,7 @@ let enemies = [
 function init() {
     console.log('Game initialization started');
     try {
-        canvas = document.getElementById('canvas');
+        canvas = document.getElementById('gameCanvas');  // Korrigierte Canvas-ID
         ctx = canvas.getContext('2d');
         
         // Initialisiere Spielobjekte
