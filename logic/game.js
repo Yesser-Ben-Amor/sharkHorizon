@@ -2,7 +2,7 @@
 let canvas;
 let ctx;
 let character;
-let player;
+let player = new Player('Player1');
 let enemies = [
     new Fisch(100, 200, 1, 2, 10),  // x, y, größe, geschwindigkeit, punkte
     new Fisch(150, 300, 1, 2, 10),
@@ -14,26 +14,24 @@ let enemies = [
 function init() {
     console.log('Game initialization started');
     try {
-        canvas = document.getElementById('gameCanvas');
+        canvas = document.getElementById('canvas');
         ctx = canvas.getContext('2d');
         
         // Initialisiere Spielobjekte
-        character = new Hai(120, 400, 1, 1);  // x, y, größe, geschwindigkeit
+        character = new Hai(120, 400, 1, 1);
         
+        console.log('Canvas dimensions:', canvas.width, canvas.height);
         console.log('Character:', character);
         console.log('Enemies:', enemies);
+        console.log('Player:', player);
         
-        // Initialisiere den Spieler
-        player = new Player('Player1');
-        
-        // Mache die Variablen global verfügbar
+        // Debug: Mache Objekte global verfügbar
         window.canvas = canvas;
-        window.ctx = ctx;
         window.character = character;
         window.player = player;
         window.enemies = enemies;
         
-        // Starte den Game Loop direkt nach der Character-Initialisierung
+        // Starte den Game Loop
         gameLoop();
         
     } catch (error) {
