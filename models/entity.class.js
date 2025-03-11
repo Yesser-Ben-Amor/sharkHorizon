@@ -5,6 +5,7 @@ class Entity {
         this.img = null;
         this.größe = 1;
         this.geschwindigkeit = 1;
+        this.imageCache = {};
     }
 
     bewegen(dx, dy) {
@@ -26,5 +27,19 @@ class Entity {
             console.error('Fehler beim Laden des Bildes:', path);
         };
         img.src = path;
+    }
+    loadImageFromCache(arr) {
+        arr.forEach((path) => {
+            let img = new Image();
+            img.src = path;
+            this.imageCache[path] = img;
+            img.onload = () => {
+                console.log('Bild geladen:', path);
+            };
+            img.onerror = () => {
+                console.error('Fehler beim Laden des Bildes:', path);
+            };
+            img.src = path;
+        });
     }
 }
