@@ -54,22 +54,13 @@ function init() {
     }
 }
 
-// Funktion zum Aktualisieren der Charakterposition
-function updateCharacterPosition() {
-    const speed = 5; // Geschwindigkeit des Hais
-    if (keys['ArrowUp']) character.position.y -= speed;
-    if (keys['ArrowDown']) character.position.y += speed;
-    if (keys['ArrowLeft']) character.position.x -= speed;
-    if (keys['ArrowRight']) character.position.x += speed;
-}
-
 // Game Loop
 function gameLoop() {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     // Aktualisiere Charakterposition
-    updateCharacterPosition();
+    character.updatePosition(keys); // Aktualisiere die Position des Hais
     
     // Draw character
     if (character.img) {

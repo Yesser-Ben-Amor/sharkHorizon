@@ -29,4 +29,15 @@ class Hai extends Entity {
     istGameOver() {
         return this.leben <= 0;
     }
+
+    updatePosition(keys) {
+        const speed = 5; // Geschwindigkeit des Hais
+        let dx = 0;
+        let dy = 0;
+        if (keys['ArrowUp']) dy -= speed;
+        if (keys['ArrowDown']) dy += speed;
+        if (keys['ArrowLeft']) dx -= speed;
+        if (keys['ArrowRight']) dx += speed;
+        this.bewegen(dx, dy);
+    }
 }
