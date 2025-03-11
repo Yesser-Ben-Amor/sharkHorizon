@@ -13,7 +13,7 @@ body {
         #2a6594 75%,
         #1a4569 100%
     );
-    animation: oceanMove 8s ease-in-out infinite;
+    animation: oceanMove 16s ease-in-out infinite;
     overflow: hidden;
 }
 
@@ -22,7 +22,7 @@ body {
         background-position: 0% 0%;
     }
     50% {
-        background-position: 0% 100%;
+        background-position: 0% 50%;
     }
 }
 
@@ -48,7 +48,7 @@ body::after {
     position: fixed;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.5);
-    animation: bubbles 8s linear infinite;
+    animation: bubbles 16s linear infinite;
     z-index: 0;
 }
 
