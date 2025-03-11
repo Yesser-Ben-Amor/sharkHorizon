@@ -12,6 +12,22 @@ let enemies = [
 let keys = {};
 
 // Initialisierung
+function setupKeyboardControls() {
+    window.addEventListener('keydown', function(e) {
+        keys[e.key] = true;
+    });
+    window.addEventListener('keyup', function(e) {
+        keys[e.key] = false;
+    });
+}
+
+function initializeGlobalVariables() {
+    window.canvas = canvas;
+    window.character = character;
+    window.player = player;
+    window.enemies = enemies;
+}
+
 function init() {
     console.log('Game initialization started');
     try {
@@ -27,19 +43,8 @@ function init() {
         console.log('Enemies:', enemies);
         console.log('Player:', player);
         
-        // Mache wichtige Spielvariablen global verfügbar für Debug-Zwecke
-        window.canvas = canvas;
-        window.character = character;
-        window.player = player;
-        window.enemies = enemies;
-        
-        // Tastatur-Event-Listener hinzufügen
-        window.addEventListener('keydown', function(e) {
-            keys[e.key] = true;
-        });
-        window.addEventListener('keyup', function(e) {
-            keys[e.key] = false;
-        });
+        initializeGlobalVariables();
+        setupKeyboardControls();
         
         // Starte den Game Loop
         gameLoop();
