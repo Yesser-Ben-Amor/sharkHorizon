@@ -9,6 +9,7 @@ let enemies = [
     new Fisch(800, 400, 1, 2, 10),  // Mitte-unten
     new Krake(750, 500, 10, 100),   // Unten, 50px vom rechten Rand entfernt
 ];
+let keys = {};
 
 // Initialisierung
 function init() {
@@ -32,6 +33,14 @@ function init() {
         window.player = player;
         window.enemies = enemies;
         
+        // Tastatur-Event-Listener hinzufügen
+        window.addEventListener('keydown', function(e) {
+            keys[e.key] = true;
+        });
+        window.addEventListener('keyup', function(e) {
+            keys[e.key] = false;
+        });
+        
         // Starte den Game Loop
         gameLoop();
         
@@ -40,10 +49,22 @@ function init() {
     }
 }
 
+// Funktion zum Aktualisieren der Charakterposition
+function updateCharacterPosition() {
+    const speed = 5; // Geschwindigkeit des Hais
+    if (keys['ArrowUp']) character.position.y -= speed;
+    if (keys['ArrowDown']) character.position.y += speed;
+    if (keys['ArrowLeft']) character.position.x -= speed;
+    if (keys['ArrowRight']) character.position.x += speed;
+}
+
 // Game Loop
 function gameLoop() {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Aktualisiere Charakterposition
+    updateCharacterPosition();
     
     // Draw character
     if (character.img) {
